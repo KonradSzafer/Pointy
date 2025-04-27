@@ -1,0 +1,60 @@
+experiment_name: pointy
+debug: True
+device: 0
+model_devices: [0]
+force_cpu: False
+
+zero_shot_eval: False
+
+training:
+  seed: 42
+  epochs: 100
+  lr: 0.0001
+  lr_scheduler: False
+  batch_size: 16
+  gradient_accumulation_steps: 1
+  num_workers: 16
+  checkpoint_every_n_samples: 0
+  save_final_model: True
+
+model:
+  name: Pointy
+  tokenizer: PointNetEmbedding
+  # encoder: TransformerEncoder
+  # num_layers: 6
+  encoder: HierarchicalTransformer
+  embed_dim: 192
+  num_heads: 64
+  merge_ratios: [2, 2, 2, 2, 2, 2]
+  depth_stages: [1, 1, 1, 1, 1, 1]
+  head: Classification
+  normal_channel: False
+  num_points: 2048
+  num_patches: 64
+  num_points_per_patch: 32
+  num_classes: 1156
+  # num_classes: 40
+  # num_classes: 15
+
+# dataset:
+#   name: Cap3D
+#   has_colors: True
+#   captions_filename: lvis-annotations.csv # 1156 classes
+#   train_path: cap3d/Cap3D_pcs_pt/
+#   test_path: cap3d/Cap3D_pcs_pt/
+#   dataset_pct: 1.0
+#   train_pct: 0.85
+
+dataset:
+  name: ModelNet40
+  has_colors: False
+  train_path: modelnet40_preprocessed/train/
+  test_path: modelnet40_preprocessed/test/
+  dataset_pct: 1.0
+
+# dataset:
+#   name: ScanObjectNN
+#   has_colors: False
+#   train_path: scanobjectnn/h5_files/main_split/training_objectdataset.h5
+#   test_path: scanobjectnn/h5_files/main_split/test_objectdataset.h5
+#   dataset_pct: 1.0

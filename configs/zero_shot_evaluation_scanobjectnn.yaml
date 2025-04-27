@@ -1,0 +1,24 @@
+experiment_name: zero_shot_evaluation_ScanObjectNN
+debug: True
+device: 0
+model_devices: [0]
+force_cpu: False
+
+checkpoint_name: checkpoint_name
+
+# Defined for compatibility
+training:
+  seed: 42
+  epochs: 100
+  checkpoint_every_n_samples: 0
+  lr: 0.0001
+  batch_size: 16
+  gradient_accumulation_steps: 1
+  num_workers: 16
+
+dataset:
+  name: ScanObjectNN
+  has_colors: False
+  train_path: scanobjectnn/h5_files/main_split/training_objectdataset.h5
+  test_path: scanobjectnn/h5_files/main_split/test_objectdataset.h5
+  dataset_pct: 1.0
